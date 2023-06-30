@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator IP</title>
+    <script src="script.js"></script>
+</head>
+<body>
+    <div>
+        <h2>Część 1. Arkusz tworzenia podsieci</h2>
+        <div>
+            <label>Sieć</label>
+            <input id="ip" type="text" value="150.50.0.0" size="30" placeholder="Adres IP"/>
+        </div>
+        <div>
+            <label>Minimalna liczba hostów</label>
+            <input id="requiredHostCount" type="number" value="500" placeholder="Wymagana liczba hostów"/><br>
+        </div>
+        <div>
+            <button type="button" onclick="calculate()">Oblicz</button>
+        </div>
+        <div>
+            <label>Klasa adresu</label>
+            <select id="addressClass">
+                <option value=""></option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+            </select>
+        </div>
+        <div>
+            <label>Domyślna maska sieci</label>
+            <input id="networkMask" type="text" size="30" placeholder="Domyślna maska sieci"/>
+        </div>
+        <div>
+            <label>Liczba bitów potrzebnych do zaadresowania wymaganej liczby hostów</label>
+            <input id="hostBitCount" type="number" placeholder="Liczba bitów potrzebnych do zaadresowania wymaganej liczby hostów"/>
+        </div>
+        <div>
+            <label>Maska podsieci</label>
+            <input id="subnetMask" type="text" size="30" placeholder="Maska podsieci"/>
+        </div>
+        <div>
+            <label>Maska podsieci w systemie dwójkowym</label>
+            <input id="binarySubnetMask" type="text" size="30" placeholder="Maska podsieci w systemie dwójkowym"/>
+        </div>
+        <table>
+            <tbody>
+                <tr>
+                    <td><label>Adres 1 użytecznej podsieci</label></td>
+                    <td><input id="firstSubnet" type="text" size="30" placeholder="Adres 1 użytecznej podsieci"/></td>
+                </tr>
+                <tr>
+                    <td><label>Adres rozgłoszeniowy 1 użytecznej podsieci</label></td>
+                    <td><input id="firstSubnetBroadcast" type="text" size="30" placeholder="Adres rozgłoszeniowy 1 użytecznej podsieci"/></td>
+                </tr>
+                <tr>
+                    <td><label>Adres pierwszego hosta w 1 użytecznej podsieci</label></td>
+                    <td><input id="firstSubnetFirstHost" type="text" size="30" placeholder="Adres pierwszego hosta w 1 użytecznej podsieci"/></td>
+                </tr>
+                <tr>
+                    <td><label>Adres ostatniego hosta w 1 użytecznej podsieci</label></td>
+                    <td><input id="firstSubnetLastHost" type="text" size="30" placeholder="Adres ostatniego hosta w 1 użytecznej podsieci"/></td>
+                </tr>
+                <tr><td>-</td></tr>
+                <tr>
+                    <td><label>Adres 2 użytecznej podsieci</label></td>
+                    <td><input id="secondSubnet" type="text" size="30" placeholder="Adres 2 użytecznej podsieci"/></td>
+                </tr>
+                <tr>
+                    <td><label>Adres rozgłoszeniowy 2 użytecznej podsieci</label></td>
+                    <td><input id="secondSubnetBroadcast" type="text" size="30" placeholder="Adres rozgłoszeniowy 2 użytecznej podsieci"/></td>
+                </tr>
+                <tr>
+                    <td><label>Adres pierwszego hosta w 2 użytecznej podsieci</label></td>
+                    <td><input id="secondSubnetFirstHost" type="text" size="30" placeholder="Adres pierwszego hosta w 2 użytecznej podsieci"/></td>
+                </tr>
+                <tr>
+                    <td><label>Adres ostatniego hosta w 2 użytecznej podsieci</label></td>
+                    <td><input id="secondSubnetLastHost" type="text" size="30" placeholder="Adres ostatniego hosta w 2 użytecznej podsieci"/></td>
+                </tr>
+                <tr><td>-</td></tr>
+                <tr>
+                    <td><label>Adres ostatniej użytecznej podsieci</label></td>
+                    <td><input id="lastSubnet" type="text" size="30" placeholder="Adres ostatniej użytecznej podsieci"/></td>
+                </tr>
+                <tr>
+                    <td><label>Adres rozgłoszeniowy ostatniej użytecznej podsieci</label></td>
+                    <td><input id="lastSubnetBroadcast" type="text" size="30" placeholder="Adres rozgłoszeniowy ostatniej użytecznej podsieci"/></td>
+                </tr>
+                <tr>
+                    <td><label>Adres pierwszego hosta w ostatniej użytecznej podsieci</label></td>
+                    <td><input id="lastSubnetFirstHost" type="text" size="30" placeholder="Adres pierwszego hosta w ostatniej użytecznej podsieci"/></td>
+                </tr>
+                <tr>
+                    <td><label>Adres ostatniego hosta w ostatniej użytecznej podsieci</label></td>
+                    <td><input id="lastSubnetLastHost" type="text" size="30" placeholder="Adres ostatniego hosta w ostatniej użytecznej podsieci"/></td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <label>Liczba użytecznych podsieci</label>
+            <input id="subnetCount" type="text" size="30" placeholder="Liczba użytecznych podsieci"/>
+        </div>
+        <div>
+            <label>Liczba hostów w każdej z podsieci</label>
+            <input id="hostCount" type="text" size="30" placeholder="Liczba użytecznych podsieci"/>
+        </div>
+    </div>
+    <div>
+        <h2>Część 2. Arkusz tworzenia podsieci z VLSM (Zmienna długość maski)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ilość hostów w podsieci</th>
+                    <th>Adres podsieci</th>
+                    <th>Maska</th>
+                    <th>Adres pierwszego hosta</th>
+                    <th>Adres ostatniego hosta</th>
+                    <th>Adres rozgłoszeniowy</th>
+                </tr>
+            </thead>
+            <tbody id="vlsmTable"></tbody>
+        </table>
+    </div>
+</body>
+</html>
