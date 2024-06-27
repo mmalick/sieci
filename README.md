@@ -1,2 +1,8 @@
-# Sieci
-Prosty kalkulator do tworzenia podsieci
+# Networks
+Simple subnet calculator
+
+
+
+
+
+
